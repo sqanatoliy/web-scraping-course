@@ -26,6 +26,12 @@ driver.get(website)
 all_matches_button = driver.find_element(By.XPATH, '//label[@analytics-event="All matches"]')
 all_matches_button.click()
 
+# select dropdown and select element inside by visible text
+dropdown = Select(driver.find_element(by='id', value='country'))
+dropdown.select_by_visible_text('Spain')
+# implicit wait (useful in JavaScript driven websites when elements need seconds to load and avoid error "ElementNotVisibleException")
+time.sleep(3)
+
 # select elements in the table
 matches = driver.find_elements(By.TAG_NAME, 'tr')
 
@@ -50,5 +56,5 @@ driver.quit()
 
 # Create Dataframe in Pandas and export to CSV (Excel)
 df = pd.DataFrame({'date': date, 'home_team': home_team, 'score': score, 'away_team': away_team})
-df.to_csv('football_data.csv', index=False)
+df.to_csv('spain_football_data.csv', index=False)
 print(df)
