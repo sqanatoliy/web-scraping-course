@@ -1,12 +1,10 @@
 import time
 
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import Select
-import pandas as pd
-import time
 
 # define the website to scrape and path where the chromediver is located and Chrome profile path
 website = "https://www.adamchoi.co.uk/overs/detailed"
