@@ -32,12 +32,15 @@ class TranscriptsSpider(CrawlSpider):
     def parse_item(self, response):
         # Getting the article box that contains the data we want (title, plot, etc)
         article = response.xpath("//article[@class='main-article']")
+        # .getall() will return a list, use .join() to turn the list into a string
+        transcript_list = article.xpath("./div[@class='full-script']/text()").getall()
+        transcript_string = ' '.join(transcript_list)
 
         # Extract the data we want and then yield it
         yield {
             'title':article.xpath("./h1/text()").get(),
             'plot':article.xpath("./p/text()").get(),
-            'transcript':article.xpath("./div[@class='full-script']/text()").getall(),
+            'transcript':transcript_string,
             'url':response.url,
-            # 'user-agent': response.request.headers['User-Agent'],
+            # 'user-agent':response.request.headers['User-Agent'],
         }
